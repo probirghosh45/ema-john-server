@@ -7,9 +7,10 @@ const { MongoClient } = require('mongodb');
 const app = express()
 const port = 8000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// root directory
+app.get('/',(req,res)=>{
+    res.send('Database Working Fine');
+ })
 
 // middleware
 app.use(express.json());  //express instead of bodyParser
@@ -23,6 +24,8 @@ client.connect(err => {
     const productsCollection = client.db("Ema_John_DB").collection("products");
     const ordersCollection = client.db("Ema_John_DB").collection("orders");
     //   console.log('Database Connected')
+
+
 
   //post endpoint
    app.post('/addProduct',(req,res)=>{
@@ -72,4 +75,4 @@ app.post('/addOrder',(req,res)=>{
 
 });
 
-app.listen(port)
+app.listen(process.env.PORT || port)
